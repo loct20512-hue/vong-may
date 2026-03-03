@@ -1,2 +1,1693 @@
-# vong-may
-na na na na a do mixi a phung thanh do
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vòng & Mây | Vòng tay handmade</title>
+  <meta name="description" content="Vòng & Mây – Cửa hàng vòng tay handmade tinh xảo, tối giản, an nhiên." />
+  <meta name="keywords" content="vòng tay, vòng handmade, vòng bạc, vòng đồng, phụ kiện" />
+  <meta name="theme-color" content="#F5F5DC" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Montserrat', sans-serif; background-color: #F5F5DC; color: #4A4A4A; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    .serif { font-family: 'Playfair Display', serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; letter-spacing: .02em; }
+    .hero-gradient { background: linear-gradient(rgba(245,245,220,0.6), rgba(245,245,220,0.6)), url('https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&q=80&w=1600'); background-size: cover; background-position: center; }
+    .product-card:hover .product-action { opacity: 1; transform: translateY(0); }
+    .smooth-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: all 0.8s cubic-bezier(.4,0,.2,1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+  </style>
+  <link rel="icon" href="data:,">
+</head>
+<body class="overflow-x-hidden">
+  <div id="passGate" class="hidden fixed inset-0 bg-[#F5F5DC]/95 backdrop-blur-md z-[100] flex items-center justify-center px-6">
+    <div class="max-w-md w-full bg-white shadow-lg rounded p-6 text-center">
+      <h2 class="serif text-2xl mb-3">Private Access</h2>
+      <p class="text-sm mb-4">To access the website, please enter the tunnel password below. If you don't know what it is, please ask whoever you got this link from.</p>
+      <input id="passInput" type="password" class="border w-full px-3 py-2 mb-3" placeholder="Tunnel password" autocomplete="off">
+      <button id="passSubmit" class="border px-4 py-2 hover:bg-black hover:text-white transition w-full">Enter</button>
+      <p id="passError" class="text-red-600 text-sm mt-3 hidden">Incorrect password. Try again.</p>
+    </div>
+  </div>
+  <nav class="fixed w-full z-50 bg-[#F5F5DC]/80 backdrop-blur-md border-b border-[#D2B48C]/20 py-4 px-8 flex justify-between items-center">
+    <div class="text-2xl serif font-bold tracking-widest text-[#8B7355]">VÒNG & MÂY</div>
+    <div class="hidden md:flex space-x-8 uppercase text-xs tracking-widest font-semibold">
+      <a href="products.html" class="hover:text-[#D2B48C] smooth-transition">Cửa hàng</a>
+      <a href="collections.html" class="hover:text-[#D2B48C] smooth-transition">Bộ sưu tập</a>
+      <a href="gallery.html" class="hover:text-[#D2B48C] smooth-transition">Album</a>
+      <a href="brand.html" class="hover:text-[#D2B48C] smooth-transition">Giới thiệu</a>
+      <a href="policy.html" class="hover:text-[#D2B48C] smooth-transition">Chính sách</a>
+      <a href="contact.html" class="hover:text-[#D2B48C] smooth-transition">Liên hệ</a>
+    </div>
+    <div class="flex items-center space-x-5">
+      <button id="menuToggle" class="md:hidden hover:scale-110 smooth-transition" aria-label="Mở menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+      <button class="hover:scale-110 smooth-transition">🔍</button>
+      <button id="cartToggle" aria-label="Mở giỏ hàng" aria-expanded="false" aria-controls="cartDrawer" class="relative cursor-pointer hover:scale-110 smooth-transition">
+        🛒 <span id="cartCount" class="absolute -top-2 -right-2 bg-[#D2B48C] text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center">0</span>
+      </button>
+    </div>
+  </nav>
+  <div id="mobileMenu" class="hidden md:hidden px-6 pb-4 pt-16 bg-[#F5F5DC]" aria-hidden="true">
+    <a class="block py-2 uppercase tracking-widest" href="products.html">Cửa hàng</a>
+    <a class="block py-2 uppercase tracking-widest" href="collections.html">Bộ sưu tập</a>
+    <a class="block py-2 uppercase tracking-widest" href="gallery.html">Album</a>
+    <a class="block py-2 uppercase tracking-widest" href="brand.html">Giới thiệu</a>
+    <a class="block py-2 uppercase tracking-widest" href="policy.html">Chính sách</a>
+    <a class="block py-2 uppercase tracking-widest" href="contact.html">Liên hệ</a>
+  </div>
+  <section id="heroSection" class="h-screen relative overflow-hidden flex items-center justify-center text-center px-4">
+    <div id="heroSlider" class="absolute inset-0 overflow-hidden">
+      <div id="heroInner" class="flex h-full transition-transform duration-700 ease-in-out"></div>
+    </div>
+    <div class="absolute top-20 right-5 z-10 flex gap-2">
+      <button id="heroGenerate" class="hidden border px-3 py-1 text-xs bg-white/80 hover:bg-white smooth-transition">Tạo banner</button>
+      <button id="heroUploadMulti" class="hidden border px-3 py-1 text-xs bg-white/80 hover:bg-white smooth-transition">Tải nhiều ảnh bìa</button>
+      <button id="heroUpload" class="hidden border px-3 py-1 text-xs bg-white/80 hover:bg-white smooth-transition">Thay ảnh bìa</button>
+    </div>
+    <div class="max-w-3xl reveal relative z-10">
+      <h1 class="serif text-5xl md:text-7xl mb-6 text-[#5D4037]">Gói ghém sự an nhiên</h1>
+      <p class="text-sm md:text-base tracking-[0.2em] uppercase mb-8">Tỉ mỉ trong từng vòng tay handmade – Đậm đà bản sắc</p>
+      <a href="products.html" class="border border-[#4A4A4A] px-10 py-3 hover:bg-[#4A4A4A] hover:text-[#F5F5DC] smooth-transition uppercase text-xs tracking-widest">Khám phá ngay</a>
+    </div>
+  </section>
+  <section id="gallery" class="py-20 px-8 max-w-7xl mx-auto reveal">
+    <div class="flex justify-between items-end mb-12">
+      <div>
+        <h2 class="serif text-4xl mb-2">Album sản phẩm</h2>
+        <div class="h-1 w-20 bg-[#D2B48C]"></div>
+      </div>
+      <button id="galleryUploadAll" class="hidden border px-4 py-2 text-xs hover:bg-black hover:text-white smooth-transition">Tải nhiều ảnh</button>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+      <div class="group relative overflow-hidden bg-[#E9E9D0] md:col-span-2 aspect-[16/9] rounded-xl shadow-lg ring-1 ring-[#D2B48C]/40 hover:ring-[#D2B48C]/60 hover:shadow-2xl transition">
+        <img id="img-gallery-1" src="https://placehold.co/800x450?text=Ảnh+1" alt="Ảnh vòng 1" class="w-full h-full object-cover group-hover:scale-105 smooth-transition cursor-zoom-in">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 smooth-transition"></div>
+        <div class="absolute bottom-2 left-2 text-xs text-white/90 bg-black/40 px-2 py-1 rounded">Xem lớn</div>
+        <button class="absolute bottom-2 right-2 text-[10px] underline hidden admin-upload" data-for="img-gallery-1">Thay ảnh</button>
+      </div>
+      <div class="group relative overflow-hidden bg-[#E9E9D0] aspect-square rounded-xl shadow-lg ring-1 ring-[#D2B48C]/40 hover:ring-[#D2B48C]/60 hover:shadow-2xl transition">
+        <img id="img-gallery-2" src="https://placehold.co/400x400?text=Ảnh+2" alt="Ảnh vòng 2" class="w-full h-full object-cover group-hover:scale-105 smooth-transition cursor-zoom-in">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 smooth-transition"></div>
+        <div class="absolute bottom-2 left-2 text-xs text-white/90 bg-black/40 px-2 py-1 rounded">Xem lớn</div>
+        <button class="absolute bottom-2 right-2 text-[10px] underline hidden admin-upload" data-for="img-gallery-2">Thay ảnh</button>
+      </div>
+      <div class="group relative overflow-hidden bg-[#E9E9D0] md:col-span-2 aspect-[3/2] rounded-xl shadow-lg ring-1 ring-[#D2B48C]/40 hover:ring-[#D2B48C]/60 hover:shadow-2xl transition">
+        <img id="img-gallery-3" src="https://placehold.co/600x400?text=Ảnh+3" alt="Ảnh vòng 3" class="w-full h-full object-cover group-hover:scale-105 smooth-transition cursor-zoom-in">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 smooth-transition"></div>
+        <div class="absolute bottom-2 left-2 text-xs text-white/90 bg-black/40 px-2 py-1 rounded">Xem lớn</div>
+        <button class="absolute bottom-2 right-2 text-[10px] underline hidden admin-upload" data-for="img-gallery-3">Thay ảnh</button>
+      </div>
+      <div class="group relative overflow-hidden bg-[#E9E9D0] aspect-square rounded-xl shadow-lg ring-1 ring-[#D2B48C]/40 hover:ring-[#D2B48C]/60 hover:shadow-2xl transition">
+        <img id="img-gallery-4" src="https://placehold.co/400x400?text=Ảnh+4" alt="Ảnh vòng 4" class="w-full h-full object-cover group-hover:scale-105 smooth-transition cursor-zoom-in">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 smooth-transition"></div>
+        <div class="absolute bottom-2 left-2 text-xs text-white/90 bg-black/40 px-2 py-1 rounded">Xem lớn</div>
+        <button class="absolute bottom-2 right-2 text-[10px] underline hidden admin-upload" data-for="img-gallery-4">Thay ảnh</button>
+      </div>
+      <div class="group relative overflow-hidden bg-[#E9E9D0] aspect-[4/5] rounded-xl shadow-lg ring-1 ring-[#D2B48C]/40 hover:ring-[#D2B48C]/60 hover:shadow-2xl transition">
+        <img id="img-gallery-5" src="https://placehold.co/400x500?text=Ảnh+5" alt="Ảnh vòng 5" class="w-full h-full object-cover group-hover:scale-105 smooth-transition cursor-zoom-in">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 smooth-transition"></div>
+        <div class="absolute bottom-2 left-2 text-xs text-white/90 bg-black/40 px-2 py-1 rounded">Xem lớn</div>
+        <button class="absolute bottom-2 right-2 text-[10px] underline hidden admin-upload" data-for="img-gallery-5">Thay ảnh</button>
+      </div>
+    </div>
+  </section>
+  <section id="featured-collections" class="py-20 px-8 max-w-7xl mx-auto reveal">
+    <div class="flex justify-between items-end mb-12">
+      <div>
+        <h2 class="serif text-4xl mb-2">Bộ sưu tập mới</h2>
+        <div class="h-1 w-20 bg-[#D2B48C]"></div>
+      </div>
+      <a href="#products" class="text-sm underline underline-offset-8 hover:text-[#D2B48C]">Xem tất cả</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div class="product-card group cursor-pointer" data-id="ring-daisy">
+        <div class="relative overflow-hidden bg-[#E9E9D0] aspect-[3/4]">
+          <img id="img-ring-daisy" src="https://placehold.co/800x1067?text=V%C3%B2ng+hoa+c%E1%BB%8Dc" alt="Vòng hoa cúc" class="w-full h-full object-cover group-hover:scale-105 smooth-transition" onerror="this.src='https://placehold.co/800x1067?text=Fallback'">
+          <div class="product-action absolute bottom-0 left-0 w-full p-4 bg-white/90 opacity-0 translate-y-4 smooth-transition text-center">
+            <button class="text-xs uppercase font-bold text-black add-to-cart" data-id="ring-daisy" data-name="Vòng hoa cúc" data-price="350000">Thêm vào giỏ hàng</button>
+            <button class="text-[10px] mt-2 underline hidden admin-upload" data-for="img-ring-daisy">Thay ảnh</button>
+          </div>
+        </div>
+        <div class="mt-4 text-center">
+          <h3 class="serif text-lg">Vòng hoa cúc</h3>
+          <p class="text-[#8B7355] mt-1 text-sm">350.000đ</p>
+        </div>
+      </div>
+      <div class="product-card group cursor-pointer md:mt-12" data-id="ring-amber">
+        <div class="relative overflow-hidden bg-[#E9E9D0] aspect-[3/4]">
+          <img id="img-ring-amber" src="https://placehold.co/800x1067?text=V%C3%B2ng+h%E1%BB%95+ph%C3%A1ch" alt="Vòng hổ phách" class="w-full h-full object-cover group-hover:scale-105 smooth-transition" onerror="this.src='https://placehold.co/800x1067?text=Fallback'">
+          <div class="product-action absolute bottom-0 left-0 w-full p-4 bg-white/90 opacity-0 translate-y-4 smooth-transition text-center">
+            <button class="text-xs uppercase font-bold text-black add-to-cart" data-id="ring-amber" data-name="Vòng hổ phách" data-price="390000">Thêm vào giỏ hàng</button>
+            <button class="text-[10px] mt-2 underline hidden admin-upload" data-for="img-ring-amber">Thay ảnh</button>
+          </div>
+        </div>
+        <div class="mt-4 text-center">
+          <h3 class="serif text-lg">Vòng hổ phách</h3>
+          <p class="text-[#8B7355] mt-1 text-sm">390.000đ</p>
+        </div>
+      </div>
+      <div class="product-card group cursor-pointer" data-id="ring-pearl">
+        <div class="relative overflow-hidden bg-[#E9E9D0] aspect-[3/4]">
+          <img id="img-ring-pearl" src="https://placehold.co/800x1067?text=V%C3%B2ng+ng%E1%BB%8Dc+trai" alt="Vòng ngọc trai" class="w-full h-full object-cover group-hover:scale-105 smooth-transition" onerror="this.src='https://placehold.co/800x1067?text=Fallback'">
+          <div class="product-action absolute bottom-0 left-0 w-full p-4 bg-white/90 opacity-0 translate-y-4 smooth-transition text-center">
+            <button class="text-xs uppercase font-bold text-black add-to-cart" data-id="ring-pearl" data-name="Vòng ngọc trai" data-price="450000">Thêm vào giỏ hàng</button>
+            <button class="text-[10px] mt-2 underline hidden admin-upload" data-for="img-ring-pearl">Thay ảnh</button>
+          </div>
+        </div>
+        <div class="mt-4 text-center">
+          <h3 class="serif text-lg">Vòng ngọc trai</h3>
+          <p class="text-[#8B7355] mt-1 text-sm">450.000đ</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="collections" class="py-20 px-8 max-w-7xl mx-auto reveal">
+    <div class="flex justify-between items-end mb-8">
+      <div>
+        <h2 class="serif text-4xl mb-2">Bộ sưu tập</h2>
+        <div class="h-1 w-20 bg-[#D2B48C]"></div>
+      </div>
+    </div>
+    <div class="border rounded bg-white p-4 mb-6">
+      <div class="grid md:grid-cols-5 gap-3">
+        <div>
+          <label class="block text-xs mb-1">Phân loại</label>
+          <select id="fType" class="border w-full px-3 py-2 text-sm">
+            <option value="">Tất cả</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs mb-1">Chất liệu</label>
+          <select id="fMaterial" class="border w-full px-3 py-2 text-sm">
+            <option value="">Tất cả</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs mb-1">Bộ sưu tập</label>
+          <select id="fCollection" class="border w-full px-3 py-2 text-sm">
+            <option value="">Tất cả</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs mb-1">Giá từ</label>
+          <input id="fPriceMin" type="number" min="0" class="border w-full px-3 py-2 text-sm" placeholder="0">
+        </div>
+        <div>
+          <label class="block text-xs mb-1">Giá đến</label>
+          <input id="fPriceMax" type="number" min="0" class="border w-full px-3 py-2 text-sm" placeholder="∞">
+        </div>
+      </div>
+      <div class="mt-3 grid md:grid-cols-5 gap-3 items-center">
+        <div class="md:col-span-2">
+          <label class="block text-xs mb-1">Trạng thái</label>
+          <div class="flex items-center gap-4">
+            <label class="text-sm"><input id="fStatusNew" type="checkbox"> Mới</label>
+            <label class="text-sm"><input id="fStatusHot" type="checkbox"> Bán chạy</label>
+          </div>
+        </div>
+        <div class="md:col-span-3 text-right">
+          <button id="fClear" class="border px-4 py-2 mr-2 hover:bg-black hover:text-white transition">Xóa lọc</button>
+          <button id="fApply" class="border px-4 py-2 hover:bg-black hover:text-white transition">Lọc</button>
+        </div>
+      </div>
+    </div>
+    <div id="colCount" class="text-sm mb-3"></div>
+    <div id="colList" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+  </section>
+  <section id="brand" class="max-w-6xl mx-auto px-6 py-24 reveal">
+    <h2 class="serif text-3xl mb-6">Giới thiệu thương hiệu</h2>
+    <div class="space-y-4">
+      <p>Logo thương hiệu được thiết kế tối giản, nhẹ nhàng, thể hiện tinh thần thủ công. Kiểu chữ mềm mại và thân thiện phù hợp với các sản phẩm làm bằng tay, tông màu ấm áp mang cảm giác tinh tế và tỉ mỉ.</p>
+      <p>Tổng thể logo truyền tải thông điệp: sản phẩm được làm bằng tay, sáng tạo cá nhân, mang giá trị riêng cho người sử dụng. Logo dùng xuyên suốt trên website, bao bì và các nền tảng bán hàng để đảm bảo nhận diện thống nhất.</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6 mt-8">
+      <div class="border rounded p-4 bg-white">
+        <h3 class="serif text-xl mb-2">Trang chủ</h3>
+        <ul class="list-disc pl-5 space-y-1 text-sm">
+          <li>Giới thiệu cửa hàng vòng tay handmade chế tác thủ công</li>
+          <li>Banner hình ảnh nổi bật thu hút người xem</li>
+          <li>Thông điệp: thủ công độc đáo, sáng tạo, giá hợp lý, phù hợp nhiều phong cách</li>
+          <li>Danh mục điều hướng: Sản phẩm, Chính sách, Liên hệ</li>
+        </ul>
+      </div>
+      <div class="border rounded p-4 bg-white">
+        <h3 class="serif text-xl mb-2">Mục tiêu</h3>
+        <ul class="list-disc pl-5 space-y-1 text-sm">
+          <li>Tạo tin tưởng và khuyến khích khám phá sản phẩm</li>
+          <li>Tăng nhận diện thương hiệu</li>
+          <li>Hỗ trợ bán hàng online hiệu quả</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section id="product-info" class="max-w-6xl mx-auto px-6 py-24 reveal">
+    <h2 class="serif text-3xl mb-6">Trang sản phẩm</h2>
+    <p class="mb-4">Trang sản phẩm hiển thị hình ảnh từng sản phẩm, tên, mô tả ngắn, giá bán và nút đặt mua.</p>
+    <h3 class="serif text-xl mb-2">Các mẫu minh họa (tượng trưng)</h3>
+    <ul class="list-disc pl-5 space-y-1">
+      <li>Vòng phong cách dễ thương</li>
+      <li>Vòng đính charm trái tim</li>
+      <li>Vòng hạt nhiều màu trẻ trung</li>
+      <li>Vòng tông thanh lịch</li>
+      <li>Vòng nữ tính nhẹ nhàng</li>
+      <li>Vòng cá tính nổi bật</li>
+    </ul>
+    <p class="mt-4">Ngoài ra cửa hàng có nhiều thiết kế khác với sự thay đổi về màu sắc, chất liệu hạt, kiểu charm và phong cách.</p>
+  </section>
+  <section id="policy" class="max-w-6xl mx-auto px-6 py-24 reveal">
+    <h2 class="serif text-3xl mb-6">Chính sách</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="border rounded p-4 bg-white">
+        <h3 class="serif text-xl mb-2">Chính sách mua hàng</h3>
+        <ul class="list-disc pl-5 space-y-1 text-sm">
+          <li>Hướng dẫn cách đặt hàng</li>
+          <li>Quy trình xác nhận đơn</li>
+        </ul>
+      </div>
+      <div class="border rounded p-4 bg-white">
+        <h3 class="serif text-xl mb-2">Chính sách giao hàng</h3>
+        <ul class="list-disc pl-5 space-y-1 text-sm">
+          <li>Thời gian vận chuyển dự kiến</li>
+          <li>Phạm vi giao hàng</li>
+          <li>Chi phí vận chuyển</li>
+        </ul>
+      </div>
+      <div class="border rounded p-4 bg-white">
+        <h3 class="serif text-xl mb-2">Chính sách đổi trả</h3>
+        <ul class="list-disc pl-5 space-y-1 text-sm">
+          <li>Hỗ trợ đổi nếu sản phẩm lỗi</li>
+          <li>Thời gian yêu cầu đổi trả</li>
+          <li>Điều kiện áp dụng</li>
+        </ul>
+      </div>
+      <div class="border rounded p-4 bg-white">
+        <h3 class="serif text-xl mb-2">Bảo mật thông tin</h3>
+        <ul class="list-disc pl-5 space-y-1 text-sm">
+          <li>Cam kết bảo vệ dữ liệu khách hàng</li>
+          <li>Không chia sẻ thông tin cho bên thứ ba</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-6 border rounded p-4 bg-white">
+      <h3 class="serif text-xl mb-2">Kết luận</h3>
+      <p class="text-sm leading-relaxed">Website Vòng & Mây được xây dựng chuyên nghiệp để giới thiệu và kinh doanh vòng tay handmade. Thông qua logo thương hiệu nhất quán, trang chủ nhẹ nhàng, trang sản phẩm rõ ràng và trang chính sách minh bạch, website hướng tới mục tiêu thu hút khách hàng, tăng nhận diện thương hiệu và hỗ trợ bán hàng online hiệu quả.</p>
+    </div>
+  </section>
+  <section id="products" class="bg-white py-24 reveal">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="serif text-3xl mb-12">Cửa hàng vòng tay</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <article class="reveal">
+          <img id="img-ring-combo" src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&q=80&w=800&h=600" alt="Combo vòng" loading="lazy" class="w-full h-64 object-cover mb-4" onerror="this.src='https://placehold.co/800x600?text=Combo+v%C3%B2ng'" />
+          <h3 class="text-xl mb-1">Combo vòng tối giản</h3>
+          <p class="mb-3 text-sm">Phối 2–3 chiếc đa chất liệu.</p>
+          <p class="font-semibold mb-3">520.000 ₫</p>
+          <div class="flex items-center gap-3">
+            <button class="border px-4 py-2 hover:bg-black hover:text-white transition add-to-cart" data-id="ring-combo" data-name="Combo vòng tối giản" data-price="520000">Thêm vào giỏ</button>
+            <button class="text-[10px] underline hidden admin-upload" data-for="img-ring-combo">Thay ảnh</button>
+          </div>
+        </article>
+        <article class="reveal">
+          <img id="img-ring-classic" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=800&h=600" alt="Vòng classic" loading="lazy" class="w-full h-64 object-cover mb-4" onerror="this.src='https://placehold.co/800x600?text=V%C3%B2ng+classic'" />
+          <h3 class="text-xl mb-1">Vòng classic</h3>
+          <p class="mb-3 text-sm">Form cổ điển, phù hợp mọi phong cách.</p>
+          <p class="font-semibold mb-3">300.000 ₫</p>
+          <div class="flex items-center gap-3">
+            <button class="border px-4 py-2 hover:bg-black hover:text-white transition add-to-cart" data-id="ring-classic" data-name="Vòng classic" data-price="300000">Thêm vào giỏ</button>
+            <button class="text-[10px] underline hidden admin-upload" data-for="img-ring-classic">Thay ảnh</button>
+          </div>
+        </article>
+        <article class="reveal">
+          <img id="img-ring-custom" src="https://images.unsplash.com/photo-1610136630460-647716cc903c?auto=format&fit=crop&q=80&w=800&h=600" alt="Vòng custom" loading="lazy" class="w-full h-64 object-cover mb-4" onerror="this.src='https://placehold.co/800x600?text=V%C3%B2ng+custom'" />
+          <h3 class="text-xl mb-1">Vòng custom</h3>
+          <p class="mb-3 text-sm">Khắc tên, kích cỡ theo yêu cầu.</p>
+          <p class="font-semibold mb-3">650.000 ₫</p>
+          <div class="flex items-center gap-3">
+            <button class="border px-4 py-2 hover:bg-black hover:text-white transition add-to-cart" data-id="ring-custom" data-name="Vòng custom" data-price="650000">Thêm vào giỏ</button>
+            <button class="text-[10px] underline hidden admin-upload" data-for="img-ring-custom">Thay ảnh</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section id="sizing" class="max-w-6xl mx-auto px-6 py-24 reveal">
+    <h2 class="text-3xl mb-6">Hướng dẫn size</h2>
+    <p class="leading-relaxed">Đo chu vi cổ tay bằng thước dây, cộng thêm 1–1.5 cm để có độ thoải mái. Nếu cần hỗ trợ, liên hệ để được tư vấn.</p>
+  </section>
+  <section id="contact" class="max-w-6xl mx-auto px-6 py-24 reveal">
+    <h2 class="text-3xl mb-6">Liên hệ</h2>
+    <p>Email: contact@vongvamay.vn</p>
+    <p>SĐT: 0123456789</p>
+  </section>
+  <footer class="bg-[#4A4A4A] text-[#F5F5DC] py-16 px-8 mt-20">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+      <div>
+        <h4 class="serif text-2xl mb-6">Vòng & Mây</h4>
+        <p class="text-sm leading-relaxed opacity-80">Mang vẻ đẹp truyền thống vào hơi thở hiện đại. Mỗi chiếc vòng là một lời nhắn nhủ về tình yêu thiên nhiên.</p>
+      </div>
+      <div>
+        <h4 class="serif text-2xl mb-6">Liên kết</h4>
+        <div class="space-y-2 text-sm">
+          <a href="products.html" class="block hover:underline">Cửa hàng</a>
+          <a href="collections.html" class="block hover:underline">Bộ sưu tập</a>
+          <a href="index.html#sizing" class="block hover:underline">Hướng dẫn size</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="serif text-2xl mb-6">Liên hệ</h4>
+        <p class="text-sm leading-relaxed opacity-80">Email: contact@vongvamay.vn</p>
+        <p class="text-sm leading-relaxed opacity-80">SĐT: 0123456789</p>
+        <p class="text-sm leading-relaxed opacity-80">© 2026 Vòng & Mây. Made with care.</p>
+      </div>
+    </div>
+  </footer>
+  <aside id="cartDrawer" class="fixed top-0 right-0 h-full w-80 bg-white shadow-xl translate-x-full transition-transform duration-300 z-50" aria-hidden="true">
+    <div class="flex items-center justify-between p-4 border-b">
+      <h3 class="text-xl">Giỏ hàng</h3>
+      <button id="cartClose" aria-label="Đóng giỏ">✕</button>
+    </div>
+    <div id="cartItems" class="p-4 space-y-3"></div>
+    <div class="p-4 border-t">
+      <div class="flex items-center justify-between mb-3">
+        <span>Tổng:</span>
+        <strong id="cartTotal">0 ₫</strong>
+      </div>
+      <button id="checkoutOpen" class="w-full text-center border px-4 py-2 hover:bg-black hover:text-white transition">Thanh toán</button>
+    </div>
+  </aside>
+  <div id="checkoutOverlay" class="hidden fixed inset-0 bg-[#F5F5DC]/95 backdrop-blur-md z-[90] overflow-y-auto">
+    <div class="max-w-7xl mx-auto p-6">
+      <div class="bg-white rounded shadow">
+        <div class="flex items-center justify-between p-4 border-b">
+          <h3 class="text-xl serif">Thanh toán</h3>
+          <button id="checkoutClose" class="border px-3 py-1 hover:bg-black hover:text-white transition">Đóng</button>
+        </div>
+        <div class="p-4">
+          <div id="progressBar" class="flex items-center gap-3 mb-6">
+            <div class="flex-1 flex items-center">
+              <div class="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center">1</div>
+              <span class="ml-2">Giỏ hàng</span>
+            </div>
+            <div class="flex-1 flex items-center">
+              <div class="w-8 h-8 rounded-full bg-gray-300 text-black flex items-center justify-center">2</div>
+              <span class="ml-2">Thông tin</span>
+            </div>
+            <div class="flex-1 flex items-center">
+              <div class="w-8 h-8 rounded-full bg-gray-300 text-black flex items-center justify-center">3</div>
+              <span class="ml-2">Hoàn tất</span>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="md:col-span-2">
+              <div id="step1" class="space-y-4">
+                <h4 class="serif text-xl">Bước 1: Giỏ hàng</h4>
+                <div id="checkoutCart" class="space-y-3"></div>
+                <div class="flex items-center justify-between">
+                  <button id="toInfo" class="border px-4 py-2 hover:bg-black hover:text-white transition">Tiếp tục</button>
+                </div>
+              </div>
+              <div id="step2" class="hidden space-y-4">
+                <h4 class="serif text-xl">Bước 2: Thông tin</h4>
+                <form id="infoForm" class="space-y-4">
+                  <div>
+                    <label class="block text-sm">Họ và tên</label>
+                    <input id="f_name" type="text" class="border w-full px-3 py-2" required>
+                  </div>
+                  <div class="grid md:grid-cols-3 gap-4">
+                    <div>
+                      <label class="block text-sm">Số điện thoại</label>
+                      <input id="f_phone" type="tel" class="border w-full px-3 py-2" required>
+                    </div>
+                    <div class="md:col-span-2">
+                      <label class="block text-sm">Email</label>
+                      <input id="f_email" type="email" class="border w-full px-3 py-2">
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-sm">Địa chỉ cụ thể</label>
+                    <input id="f_addr" type="text" class="border w-full px-3 py-2" required>
+                  </div>
+                  <div class="grid md:grid-cols-3 gap-4">
+                    <div>
+                      <label class="block text-sm">Tỉnh/Thành phố</label>
+                      <input id="f_city" type="text" class="border w-full px-3 py-2" required>
+                    </div>
+                    <div>
+                      <label class="block text-sm">Quận/Huyện</label>
+                      <input id="f_district" type="text" class="border w-full px-3 py-2" required>
+                    </div>
+                    <div>
+                      <label class="block text-sm">Phường/Xã</label>
+                      <input id="f_ward" type="text" class="border w-full px-3 py-2" required>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-sm">Ghi chú đơn hàng</label>
+                    <textarea id="f_note" class="border w-full px-3 py-2"></textarea>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <button id="backToCart" type="button" class="border px-4 py-2 hover:bg-black hover:text-white transition">Quay lại</button>
+                    <button id="toPayment" type="button" class="border px-4 py-2 hover:bg-black hover:text-white transition">Tiếp tục</button>
+                  </div>
+                  <p id="formError" class="text-red-600 text-sm hidden">Vui lòng nhập đúng thông tin bắt buộc.</p>
+                </form>
+              </div>
+              <div id="step3" class="hidden space-y-4">
+                <h4 class="serif text-xl">Bước 3: Phương thức thanh toán</h4>
+                <div class="space-y-2">
+                  <label class="flex items-center gap-2"><input type="radio" name="pay" value="COD" checked> COD - Thanh toán khi nhận hàng</label>
+                  <label class="flex items-center gap-2"><input type="radio" name="pay" value="Bank"> Chuyển khoản ngân hàng</label>
+                  <label class="flex items-center gap-2"><input type="radio" name="pay" value="MoMo"> Ví MoMo</label>
+                </div>
+                <div id="payDetail" class="text-sm bg-[#F5F5DC] p-3 rounded">Thanh toán khi nhận hàng</div>
+                <div class="flex items-center justify-between">
+                  <button id="backToInfo" class="border px-4 py-2 hover:bg-black hover:text-white transition">Quay lại</button>
+                  <button id="placeOrder" class="border px-4 py-2 hover:bg-black hover:text-white transition">Đặt hàng</button>
+                </div>
+              </div>
+            </div>
+            <div class="md:col-span-1">
+              <div class="sticky top-4 border rounded p-4 bg-white">
+                <h4 class="serif text-xl mb-3">Tóm tắt đơn hàng</h4>
+                <div id="summaryItems" class="space-y-2"></div>
+                <div class="mt-3 flex items-center justify-between"><span>Tạm tính</span><strong id="sumSubtotal">0 ₫</strong></div>
+                <div class="mt-1 flex items-center justify-between"><span>Phí vận chuyển</span><strong id="sumShipping">0 ₫</strong></div>
+                <div class="mt-1 text-xs text-[#8B7355]">Miễn phí cho đơn ≥ 500K</div>
+                <div class="mt-3">
+                  <label class="block text-sm mb-1">Mã giảm giá</label>
+                  <div class="flex gap-2">
+                    <input id="couponCode" type="text" class="border flex-1 px-3 py-2" placeholder="Nhập mã (ví dụ: VONG10, FREESHIP)">
+                    <button id="applyCoupon" class="border px-3 py-2 hover:bg-black hover:text-white transition">Áp dụng</button>
+                  </div>
+                  <div id="couponInfo" class="text-xs mt-2 text-[#8B7355]"></div>
+                </div>
+            <div class="mt-2">
+              <label class="block text-sm mb-1">Giảm giá tùy chọn (VND)</label>
+              <div class="flex gap-2">
+                <input id="customDiscount" type="number" min="0" class="border flex-1 px-3 py-2" placeholder="Ví dụ: 50000">
+                <button id="applyCustomDiscount" class="border px-3 py-2 hover:bg-black hover:text-white transition">Áp dụng</button>
+              </div>
+            </div>
+                <div class="mt-2 flex items-center justify-between"><span>Giảm giá</span><strong id="sumDiscount">0 ₫</strong></div>
+                <div class="mt-3 flex items-center justify-between text-lg"><span>Tổng cộng</span><strong id="sumTotal">0 ₫</strong></div>
+            <div id="sumNote" class="mt-2 text-xs text-red-700"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="orderSuccess" class="hidden fixed inset-0 bg-black/50 z-[100] flex items-center justify-center px-6">
+    <div class="max-w-md w-full bg-white rounded p-6">
+      <h3 class="serif text-2xl mb-2">Đặt hàng thành công 🎉</h3>
+      <div class="space-y-1 text-sm">
+        <div>Mã đơn: <strong id="successCode"></strong></div>
+        <div>Tổng tiền: <strong id="successTotal"></strong></div>
+        <div>Thanh toán: <strong id="successPay"></strong></div>
+      </div>
+      <div class="mt-4 flex gap-3">
+        <button id="printOrder" class="border px-4 py-2 hover:bg-black hover:text-white transition">In đơn hàng</button>
+        <button id="continueShop" class="border px-4 py-2 hover:bg-black hover:text-white transition">Tiếp tục mua sắm</button>
+      </div>
+    </div>
+  </div>
+  <div id="productDetail" class="hidden fixed inset-0 bg-[#F5F5DC]/95 backdrop-blur-md z-[95] overflow-y-auto">
+    <div class="max-w-6xl mx-auto p-6">
+      <div class="bg-white rounded shadow p-4">
+        <div class="flex items-center justify-between mb-4">
+          <h3 id="pdName" class="serif text-2xl">Sản phẩm</h3>
+          <button id="pdClose" class="border px-3 py-1 hover:bg-black hover:text-white transition">Đóng</button>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <div class="relative">
+              <img id="pdMain" src="" alt="" class="w-full h-[420px] object-cover cursor-zoom-in">
+            </div>
+            <div id="pdThumbs" class="grid grid-cols-5 gap-2 mt-3"></div>
+          </div>
+          <div>
+            <div class="text-[#8B7355] mb-2" id="pdPrice">0 ₫</div>
+            <div id="pdDesc" class="mb-3 text-sm"></div>
+            <div class="grid grid-cols-2 gap-3 text-sm">
+              <div><div class="font-semibold mb-1">Chất liệu</div><div id="pdMaterial"></div></div>
+              <div><div class="font-semibold mb-1">Kích thước</div><div id="pdSize"></div></div>
+            </div>
+            <div class="mt-3">
+              <div class="font-semibold mb-1 text-sm">Hướng dẫn bảo quản</div>
+              <div id="pdCare" class="text-sm"></div>
+            </div>
+            <div class="mt-4 flex gap-3">
+              <button id="pdAddCart" class="border px-4 py-2 hover:bg-black hover:text-white transition">Thêm vào giỏ</button>
+              <a id="pdShare" class="border px-4 py-2 hover:bg-black hover:text-white transition" href="#">Chia sẻ</a>
+            </div>
+            <div class="mt-6">
+              <div class="flex items-center justify-between">
+                <h4 class="serif text-xl">Đánh giá</h4>
+                <span id="pdRatingAvg" class="text-sm"></span>
+              </div>
+              <div id="pdReviews" class="space-y-3 mt-3"></div>
+              <div class="mt-4 border rounded p-3">
+                <h5 class="font-semibold mb-2 text-sm">Viết đánh giá</h5>
+                <div class="grid grid-cols-2 gap-2">
+                  <input id="rvName" type="text" class="border px-3 py-2" placeholder="Tên">
+                  <select id="rvStars" class="border px-3 py-2">
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                  </select>
+                </div>
+                <textarea id="rvText" class="border w-full px-3 py-2 mt-2" placeholder="Bình luận"></textarea>
+                <button id="rvSubmit" class="mt-2 border px-4 py-2 hover:bg-black hover:text-white transition">Gửi đánh giá</button>
+                <p id="rvMsg" class="text-xs mt-2"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-8">
+          <h4 class="serif text-xl mb-3">Sản phẩm liên quan</h4>
+          <div id="pdRelated" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="imageZoom" class="hidden fixed inset-0 bg-black/80 z-[100] flex items-center justify-center">
+    <img id="zoomImg" src="" alt="" class="max-w-[90vw] max-h-[90vh] object-contain">
+  </div>
+  <div class="fixed bottom-6 right-6 flex flex-col gap-3 z-[80]">
+    <a href="https://m.me/username" target="_blank" class="border rounded-full px-4 py-2 bg-white hover:bg-black hover:text-white transition">Messenger</a>
+    <a href="https://zalo.me/0901234567" target="_blank" class="border rounded-full px-4 py-2 bg-white hover:bg-black hover:text-white transition">Zalo</a>
+    <button id="adminBtn" class="border rounded-full px-4 py-2 bg-white hover:bg-black hover:text-white transition">Admin</button>
+    <button id="adminLogout" class="hidden border rounded-full px-4 py-2 bg-white hover:bg-black hover:text-white transition">Đăng xuất</button>
+    <button id="exportImagesBtn" class="hidden border rounded-full px-4 py-2 bg-white hover:bg-black hover:text-white transition">Xuất ảnh</button>
+    <button id="importImagesBtn" class="hidden border rounded-full px-4 py-2 bg-white hover:bg-black hover:text-white transition">Nhập ảnh</button>
+  </div>
+  <div id="adminLogin" class="hidden fixed inset-0 bg-[#F5F5DC]/95 backdrop-blur-md z-[95]">
+    <div class="max-w-md mx-auto bg-white rounded shadow p-6 mt-20">
+      <h3 class="serif text-2xl mb-4">Đăng nhập Admin</h3>
+      <div class="space-y-3">
+        <div>
+          <label class="block text-sm mb-1">Tài khoản</label>
+          <input id="adminUserInput" type="text" class="border w-full px-3 py-2">
+        </div>
+        <div>
+          <label class="block text-sm mb-1">Mật khẩu</label>
+          <input id="adminPassInput" type="password" class="border w-full px-3 py-2">
+        </div>
+      </div>
+      <div class="mt-4 flex gap-3">
+        <button id="adminSubmit" class="border px-4 py-2 hover:bg-black hover:text-white transition">Đăng nhập</button>
+        <button id="adminClose" class="border px-4 py-2 hover:bg-black hover:text-white transition">Đóng</button>
+      </div>
+      <p id="adminError" class="text-red-600 text-sm mt-2 hidden">Sai tài khoản hoặc mật khẩu.</p>
+    </div>
+  </div>
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuToggle.addEventListener('click', () => {
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', String(!expanded));
+      mobileMenu.classList.toggle('hidden');
+      mobileMenu.setAttribute('aria-hidden', String(expanded));
+    });
+    const cartToggle = document.getElementById('cartToggle');
+    const cartClose = document.getElementById('cartClose');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartCount = document.getElementById('cartCount');
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    const currency = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
+    const SALE_ACTIVE = true;
+    const SALE_PERCENT = 0.5;
+    const salePrice = (price) => SALE_ACTIVE ? Math.round(price * (1 - SALE_PERCENT)) : Math.round(price);
+    const CART_KEY = 'vongvamay_cart';
+    const HERO_KEY = 'vongvamay_hero';
+    const GALLERY_KEY_PREFIX = 'vongvamay_gallery_';
+    const PASS_AUTH_KEY = 'vongvamay_auth_ok';
+    const PASS_TTL_MS = 8 * 60 * 60 * 1000;
+    const TUNNEL_PASS_KEY = 'vongvamay_tunnel_pass';
+    const ORDERS_KEY = 'vongvamay_orders';
+    const loadCart = () => JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+    const saveCart = (items) => localStorage.setItem(CART_KEY, JSON.stringify(items));
+    const renderCart = () => {
+      const items = loadCart();
+      cartCount.textContent = items.reduce((sum, i) => sum + i.qty, 0);
+      cartItems.innerHTML = items.length ? '' : '<p>Giỏ hàng trống.</p>';
+      let total = 0;
+      items.forEach(i => {
+        total += i.price * i.qty;
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between';
+        row.innerHTML = `
+          <div>
+            <div class="font-medium">${i.name}</div>
+            <div class="text-sm">${currency.format(i.price)}</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="border px-2" data-act="dec" data-id="${i.id}">-</button>
+            <span>${i.qty}</span>
+            <button class="border px-2" data-act="inc" data-id="${i.id}">+</button>
+            <button class="border px-2" data-act="del" data-id="${i.id}">x</button>
+          </div>
+        `;
+        cartItems.appendChild(row);
+      });
+      cartTotal.textContent = currency.format(total);
+    };
+    const openCart = () => {
+      cartDrawer.classList.remove('translate-x-full');
+      cartDrawer.setAttribute('aria-hidden', 'false');
+      cartToggle.setAttribute('aria-expanded', 'true');
+    };
+    const closeCart = () => {
+      cartDrawer.classList.add('translate-x-full');
+      cartDrawer.setAttribute('aria-hidden', 'true');
+      cartToggle.setAttribute('aria-expanded', 'false');
+    };
+    cartToggle.addEventListener('click', () => {
+      const expanded = cartToggle.getAttribute('aria-expanded') === 'true';
+      expanded ? closeCart() : openCart();
+    });
+    cartClose.addEventListener('click', closeCart);
+    cartItems.addEventListener('click', (e) => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      const act = btn.getAttribute('data-act');
+      const id = btn.getAttribute('data-id');
+      const items = loadCart();
+      const idx = items.findIndex(x => x.id === id);
+      if (idx === -1) return;
+      if (act === 'inc') items[idx].qty += 1;
+      if (act === 'dec') items[idx].qty = Math.max(1, items[idx].qty - 1);
+      if (act === 'del') items.splice(idx, 1);
+      saveCart(items);
+      renderCart();
+    });
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        const name = btn.getAttribute('data-name');
+        const price = parseInt(btn.getAttribute('data-price'), 10);
+        const priceFinal = salePrice(price);
+        const items = loadCart();
+        const existing = items.find(i => i.id === id);
+        if (existing) existing.qty += 1;
+        else items.push({ id, name, price: priceFinal, qty: 1 });
+        saveCart(items);
+        renderCart();
+        openCart();
+      });
+    });
+    renderCart();
+    const checkoutOverlay = document.getElementById('checkoutOverlay');
+    const checkoutOpenBtn = document.getElementById('checkoutOpen');
+    const checkoutCloseBtn = document.getElementById('checkoutClose');
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
+    const progressBar = document.getElementById('progressBar');
+    const toInfo = document.getElementById('toInfo');
+    const backToCart = document.getElementById('backToCart');
+    const toPayment = document.getElementById('toPayment');
+    const backToInfo = document.getElementById('backToInfo');
+    const checkoutCart = document.getElementById('checkoutCart');
+    const summaryItems = document.getElementById('summaryItems');
+    const sumSubtotal = document.getElementById('sumSubtotal');
+    const sumShipping = document.getElementById('sumShipping');
+    const sumTotal = document.getElementById('sumTotal');
+    const couponCode = document.getElementById('couponCode');
+    const applyCoupon = document.getElementById('applyCoupon');
+    const couponInfo = document.getElementById('couponInfo');
+    const sumDiscount = document.getElementById('sumDiscount');
+    const customDiscountInput = document.getElementById('customDiscount');
+    const applyCustomDiscountBtn = document.getElementById('applyCustomDiscount');
+    const sumNote = document.getElementById('sumNote');
+    const payDetail = document.getElementById('payDetail');
+    const placeOrder = document.getElementById('placeOrder');
+    const infoForm = document.getElementById('infoForm');
+    const formError = document.getElementById('formError');
+    const orderSuccess = document.getElementById('orderSuccess');
+    const successCode = document.getElementById('successCode');
+    const successTotal = document.getElementById('successTotal');
+    const successPay = document.getElementById('successPay');
+    const printOrder = document.getElementById('printOrder');
+    const continueShop = document.getElementById('continueShop');
+    const subtotalCalc = () => loadCart().reduce((s,i)=>s+i.price*i.qty,0);
+    const shippingCalc = (sub) => sub >= 500000 ? 0 : 30000;
+    const COUPONS = { 'VONG10': { percent: 0.1 }, 'FREESHIP': { shipFree: true } };
+    let appliedCoupon = null;
+    let manualDiscount = 0;
+    const updateProgress = (active) => {
+      const dots = progressBar.querySelectorAll('.w-8');
+      dots.forEach((d,idx)=>{ d.className = 'w-8 h-8 rounded-full flex items-center justify-center ' + (idx<active ? 'bg-black text-white':'bg-gray-300 text-black'); });
+    };
+    const renderCheckoutViews = () => {
+      const items = loadCart();
+      checkoutCart.innerHTML = items.length ? '' : '<p>Giỏ hàng trống.</p>';
+      summaryItems.innerHTML = '';
+      items.forEach(i=>{
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between';
+        row.innerHTML = `<div>${i.name} x${i.qty}</div><div>${currency.format(i.price*i.qty)}</div>`;
+        checkoutCart.appendChild(row.cloneNode(true));
+        summaryItems.appendChild(row);
+      });
+      const sub = subtotalCalc();
+      let ship = shippingCalc(sub);
+      let discount = 0;
+      if (appliedCoupon && COUPONS[appliedCoupon]) {
+        const c = COUPONS[appliedCoupon];
+        if (c.percent) discount = Math.round(sub * c.percent);
+        if (c.shipFree) ship = 0;
+      }
+      if (manualDiscount > 0) discount += Math.min(manualDiscount, sub);
+      sumSubtotal.textContent = currency.format(sub);
+      sumShipping.textContent = currency.format(ship);
+      sumDiscount.textContent = currency.format(discount);
+      const totalCalc = sub - discount + ship;
+      sumTotal.textContent = currency.format(totalCalc);
+      if (totalCalc <= 250000) {
+        sumNote.textContent = 'Đơn dưới 250K: vui lòng liên hệ 0123456789 để xác nhận.';
+      } else {
+        sumNote.textContent = '';
+      }
+    };
+    applyCoupon?.addEventListener('click', () => {
+      const code = (couponCode.value || '').trim().toUpperCase();
+      if (COUPONS[code]) {
+        appliedCoupon = code;
+        couponInfo.textContent = 'Áp dụng: ' + code;
+      } else {
+        appliedCoupon = null;
+        couponInfo.textContent = 'Mã không hợp lệ';
+      }
+      renderCheckoutViews();
+    });
+    applyCustomDiscountBtn?.addEventListener('click', () => {
+      const val = parseInt((customDiscountInput.value || '0'), 10);
+      manualDiscount = isNaN(val) ? 0 : Math.max(0, val);
+      renderCheckoutViews();
+    });
+    const openCheckout = () => {
+      checkoutOverlay.classList.remove('hidden');
+      step1.classList.remove('hidden'); step2.classList.add('hidden'); step3.classList.add('hidden');
+      updateProgress(1);
+      renderCheckoutViews();
+    };
+    const closeCheckout = () => {
+      checkoutOverlay.classList.add('hidden');
+    };
+    checkoutOpenBtn?.addEventListener('click', () => { closeCart(); openCheckout(); });
+    checkoutCloseBtn?.addEventListener('click', closeCheckout);
+    toInfo?.addEventListener('click', () => { step1.classList.add('hidden'); step2.classList.remove('hidden'); updateProgress(2); });
+    backToCart?.addEventListener('click', () => { step2.classList.add('hidden'); step1.classList.remove('hidden'); updateProgress(1); });
+    toPayment?.addEventListener('click', () => {
+      const phone = document.getElementById('f_phone').value.trim();
+      const name = document.getElementById('f_name').value.trim();
+      const addr = document.getElementById('f_addr').value.trim();
+      const city = document.getElementById('f_city').value.trim();
+      const district = document.getElementById('f_district').value.trim();
+      const ward = document.getElementById('f_ward').value.trim();
+      const validPhone = /^\d{10}$/.test(phone);
+      if (!name || !addr || !city || !district || !ward || !validPhone) { formError.classList.remove('hidden'); return; }
+      formError.classList.add('hidden');
+      step2.classList.add('hidden'); step3.classList.remove('hidden'); updateProgress(3);
+    });
+    backToInfo?.addEventListener('click', () => { step3.classList.add('hidden'); step2.classList.remove('hidden'); updateProgress(2); });
+    document.querySelectorAll('input[name="pay"]').forEach(r=>{
+      r.addEventListener('change', ()=>{
+        const v = r.value;
+        if (v==='COD') payDetail.textContent = 'Thanh toán khi nhận hàng';
+        if (v==='Bank') payDetail.textContent = 'Ngân hàng: CTK Vòng & Mây • STK: 123456789 • Vietcombank';
+        if (v==='MoMo') payDetail.textContent = 'Ví MoMo: 0123456789';
+      });
+    });
+    const saveOrder = (order) => {
+      const prev = JSON.parse(localStorage.getItem(ORDERS_KEY) || '[]');
+      prev.push(order);
+      localStorage.setItem(ORDERS_KEY, JSON.stringify(prev));
+    };
+    placeOrder?.addEventListener('click', () => {
+      const items = loadCart();
+      if (!items.length) return;
+      const sub = subtotalCalc();
+      const ship = shippingCalc(sub);
+      const total = sub - (appliedCoupon ? (COUPONS[appliedCoupon]?.percent ? Math.round(sub*COUPONS[appliedCoupon].percent) : 0) : 0) - manualDiscount + ship;
+      const payEl = document.querySelector('input[name="pay"]:checked');
+      if (!payEl) { formError?.classList.remove('hidden'); return; }
+      const pay = payEl.value;
+      const orderId = 'VM-' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '-' + Math.random().toString(36).slice(2,8).toUpperCase();
+      const data = {
+        id: orderId,
+        items,
+        subtotal: sub,
+        shipping: ship,
+        discount: (appliedCoupon ? (COUPONS[appliedCoupon]?.percent ? Math.round(sub*COUPONS[appliedCoupon].percent) : 0) : 0) + (manualDiscount || 0),
+        coupon: appliedCoupon || null,
+        total,
+        pay,
+        info: {
+          name: document.getElementById('f_name').value.trim(),
+          phone: document.getElementById('f_phone').value.trim(),
+          email: document.getElementById('f_email').value.trim(),
+          addr: document.getElementById('f_addr').value.trim(),
+          city: document.getElementById('f_city').value.trim(),
+          district: document.getElementById('f_district').value.trim(),
+          ward: document.getElementById('f_ward').value.trim(),
+          note: document.getElementById('f_note').value.trim(),
+        },
+        createdAt: Date.now()
+      };
+      saveOrder(data);
+      localStorage.removeItem(CART_KEY);
+      renderCart();
+      successCode.textContent = orderId;
+      successTotal.textContent = currency.format(total);
+      successPay.textContent = pay;
+      orderSuccess.classList.remove('hidden');
+      closeCheckout();
+    });
+    printOrder?.addEventListener('click', () => window.print());
+    continueShop?.addEventListener('click', () => { orderSuccess.classList.add('hidden'); });
+    const PRODUCTS = {
+      'ring-daisy': { name: 'Vòng hoa cúc', price: 350000, slug: 'vong-hoa-cuc', images: ['#img-ring-daisy'], desc: 'Phong cách dễ thương, phù hợp nhiều trang phục.', material: 'Acrylic', size: 'ĐK 5.5–6.5 cm', care: 'Tránh nước nóng, cất nơi khô ráo', type: 'Hạt', collection: 'Minimal', status: { new: true, hot: false }, pop: 65 },
+      'ring-amber': { name: 'Vòng hổ phách', price: 390000, slug: 'vong-ho-phach', images: ['#img-ring-amber'], desc: 'Tông ấm, sang trọng, cổ điển.', material: 'Acrylic', size: 'ĐK 6–7 cm', care: 'Tránh hoá chất mạnh', type: 'Hạt', collection: 'Vintage', status: { new: false, hot: true }, pop: 88 },
+      'ring-pearl': { name: 'Vòng ngọc trai', price: 450000, slug: 'vong-ngoc-trai', images: ['#img-ring-pearl'], desc: 'Thanh lịch, nữ tính.', material: 'Giả ngọc trai', size: 'ĐK 5.8–6.8 cm', care: 'Lau khô sau sử dụng', type: 'Hạt', collection: 'Elegance', status: { new: true, hot: true }, pop: 92 },
+      'ring-combo': { name: 'Combo vòng tối giản', price: 520000, slug: 'combo-vong-toi-gian', images: ['#img-ring-combo'], desc: 'Phối 2–3 chiếc đa chất liệu.', material: 'Mixed', size: 'ĐK tuỳ mẫu', care: 'Bảo quản riêng từng chiếc', type: 'Combo', collection: 'Minimal', status: { new: false, hot: true }, pop: 73 },
+      'ring-classic': { name: 'Vòng classic', price: 300000, slug: 'vong-classic', images: ['#img-ring-classic'], desc: 'Form cổ điển, dễ phối.', material: 'Gỗ', size: 'ĐK 6–7 cm', care: 'Tránh ẩm mốc', type: 'Hạt', collection: 'Classic', status: { new: false, hot: false }, pop: 54 },
+      'ring-custom': { name: 'Vòng custom', price: 650000, slug: 'vong-custom', images: ['#img-ring-custom'], desc: 'Khắc tên, kích cỡ theo yêu cầu.', material: 'Tuỳ chọn', size: 'Theo yêu cầu', care: 'Theo hướng dẫn riêng', type: 'Custom', collection: 'Personal', status: { new: true, hot: false }, pop: 40 }
+    };
+    const REV_KEY_PREFIX = 'vongvamay_reviews_';
+    const slugToId = (slug) => Object.keys(PRODUCTS).find(id => PRODUCTS[id].slug === slug);
+    const pd = {
+      wrap: document.getElementById('productDetail'),
+      name: document.getElementById('pdName'),
+      main: document.getElementById('pdMain'),
+      thumbs: document.getElementById('pdThumbs'),
+      price: document.getElementById('pdPrice'),
+      desc: document.getElementById('pdDesc'),
+      material: document.getElementById('pdMaterial'),
+      size: document.getElementById('pdSize'),
+      care: document.getElementById('pdCare'),
+      add: document.getElementById('pdAddCart'),
+      related: document.getElementById('pdRelated'),
+      share: document.getElementById('pdShare'),
+      close: document.getElementById('pdClose'),
+      rvList: document.getElementById('pdReviews'),
+      rvAvg: document.getElementById('pdRatingAvg'),
+      rvName: document.getElementById('rvName'),
+      rvStars: document.getElementById('rvStars'),
+      rvText: document.getElementById('rvText'),
+      rvSubmit: document.getElementById('rvSubmit'),
+      rvMsg: document.getElementById('rvMsg')
+    };
+    const schemaElId = 'schemaProduct';
+    const ensureSchema = (data) => {
+      let el = document.getElementById(schemaElId);
+      if (!el) {
+        el = document.createElement('script');
+        el.type = 'application/ld+json';
+        el.id = schemaElId;
+        document.head.appendChild(el);
+      }
+      el.textContent = JSON.stringify({
+        '@context':'https://schema.org',
+        '@type':'Product',
+        name: data.name,
+        description: data.desc,
+        sku: data.slug,
+        offers: { '@type':'Offer', priceCurrency:'VND', price:(data.price/1000).toFixed(3) }
+      });
+    };
+    const openProduct = (id) => {
+      const p = PRODUCTS[id];
+      if (!p) return;
+      document.title = p.name + ' | Vòng & Mây';
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', p.desc);
+      ensureSchema(p);
+      pd.name.textContent = p.name;
+      pd.price.innerHTML = '<span class="line-through opacity-50 mr-2">' + currency.format(p.price) + '</span><span>' + currency.format(salePrice(p.price)) + '</span>';
+      pd.desc.textContent = p.desc;
+      pd.material.textContent = p.material;
+      pd.size.textContent = p.size;
+      pd.care.textContent = p.care;
+      pd.thumbs.innerHTML = '';
+      let imgs = p.images.map(sel => {
+        const el = document.querySelector(sel);
+        return el ? el.src : '';
+      }).filter(Boolean);
+      const defaults = [
+        'https://placehold.co/800x600?text=V%C3%B2ng+tay+1',
+        'https://placehold.co/800x600?text=V%C3%B2ng+tay+2',
+        'https://placehold.co/800x600?text=V%C3%B2ng+tay+3'
+      ];
+      while (imgs.length < 3) {
+        imgs.push(defaults[imgs.length] || defaults[0]);
+      }
+      const mainSrc = imgs[0];
+      pd.main.src = mainSrc;
+      imgs.forEach(src=>{
+        const t = document.createElement('img');
+        t.src = src;
+        t.className = 'w-full h-16 object-cover cursor-pointer';
+        t.addEventListener('click', () => { pd.main.src = src; });
+        pd.thumbs.appendChild(t);
+      });
+      pd.add.onclick = () => {
+        const items = loadCart();
+        const ex = items.find(i=>i.id===id);
+        const finalPrice = salePrice(p.price);
+        if (ex) ex.qty+=1; else items.push({ id, name: p.name, price: finalPrice, qty: 1 });
+        saveCart(items);
+        renderCart();
+        openCart();
+      };
+      pd.share.href = location.origin + location.pathname + '#/san-pham/' + p.slug;
+      pd.related.innerHTML = '';
+      Object.keys(PRODUCTS).filter(x=>x!==id).slice(0,4).forEach(rid=>{
+        const rp = PRODUCTS[rid];
+        const div = document.createElement('div');
+        div.className = 'border rounded p-2 cursor-pointer';
+        div.innerHTML = `<div class="text-sm">${rp.name}</div><div class="text-xs">${currency.format(rp.price)}</div>`;
+        div.addEventListener('click', ()=>openProduct(rid));
+        pd.related.appendChild(div);
+      });
+      const revKey = REV_KEY_PREFIX + id;
+      const loadReviews = () => JSON.parse(localStorage.getItem(revKey) || '[]');
+      const saveReviews = (arr) => localStorage.setItem(revKey, JSON.stringify(arr));
+      const renderReviews = () => {
+        const list = loadReviews().filter(r=>r.approved || admin);
+        pd.rvList.innerHTML = list.length ? '' : '<p class="text-sm">Chưa có đánh giá.</p>';
+        let sum = 0;
+        list.forEach((r, idx)=>{
+          sum += r.stars;
+          const row = document.createElement('div');
+          row.className = 'border rounded p-2 text-sm flex items-start justify-between gap-3';
+          row.innerHTML = `<div><div class="font-medium">${'⭐'.repeat(r.stars)}</div><div>${r.text}</div><div class="text-xs text-[#8B7355]">${r.name}</div></div>`;
+          if (admin && !r.approved) {
+            const btn = document.createElement('button');
+            btn.className = 'border px-2 py-1 text-xs';
+            btn.textContent = 'Duyệt';
+            btn.addEventListener('click', () => {
+              const arr = loadReviews();
+              arr[idx].approved = true;
+              saveReviews(arr);
+              renderReviews();
+            });
+            row.appendChild(btn);
+          }
+          pd.rvList.appendChild(row);
+        });
+        pd.rvAvg.textContent = list.length ? ('Trung bình: ' + (sum/list.length).toFixed(1) + '/5') : '';
+      };
+      renderReviews();
+      pd.rvSubmit.onclick = () => {
+        const name = (pd.rvName.value || '').trim();
+        const stars = parseInt(pd.rvStars.value,10);
+        const text = (pd.rvText.value || '').trim();
+        if (!name || !text || !(stars>=1&&stars<=5)) { pd.rvMsg.textContent = 'Vui lòng nhập đủ thông tin.'; return; }
+        const arr = JSON.parse(localStorage.getItem(revKey) || '[]');
+        arr.push({ name, stars, text, approved: false, ts: Date.now() });
+        localStorage.setItem(revKey, JSON.stringify(arr));
+        pd.rvName.value=''; pd.rvText.value='';
+        pd.rvMsg.textContent = 'Đã gửi, chờ duyệt.';
+        renderReviews();
+      };
+      pd.wrap.classList.remove('hidden');
+      location.hash = '#/san-pham/' + p.slug;
+    };
+    if (pd.close) pd.close.addEventListener('click', () => { pd.wrap.classList.add('hidden'); });
+    if (pd.main) pd.main.addEventListener('click', () => { document.getElementById('zoomImg').src = pd.main.src; document.getElementById('imageZoom').classList.remove('hidden'); });
+    document.getElementById('imageZoom').addEventListener('click', () => { document.getElementById('imageZoom').classList.add('hidden'); });
+    document.querySelectorAll('.product-card').forEach(c=>{
+      c.addEventListener('click', () => {
+        const id = c.getAttribute('data-id');
+        openProduct(id);
+      });
+    });
+    const routeFromHash = () => {
+      const h = location.hash;
+      const m = h.match(/^#\/san-pham\/(.+)$/);
+      if (m) {
+        const id = slugToId(m[1]);
+        if (id) openProduct(id);
+      }
+    };
+    window.addEventListener('hashchange', routeFromHash);
+    routeFromHash();
+    const fEls = {
+      type: document.getElementById('fType'),
+      material: document.getElementById('fMaterial'),
+      collection: document.getElementById('fCollection'),
+      min: document.getElementById('fPriceMin'),
+      max: document.getElementById('fPriceMax'),
+      new: document.getElementById('fStatusNew'),
+      hot: document.getElementById('fStatusHot'),
+      clear: document.getElementById('fClear'),
+      apply: document.getElementById('fApply'),
+      list: document.getElementById('colList'),
+      count: document.getElementById('colCount')
+    };
+    const unique = (arr) => Array.from(new Set(arr.filter(Boolean)));
+    const initCollectionFilters = () => {
+      const all = Object.values(PRODUCTS);
+      const types = unique(all.map(p=>p.type));
+      const mats = unique(all.map(p=>p.material));
+      const cols = unique(all.map(p=>p.collection));
+      const fillSel = (sel, items) => { items.forEach(v=>{ const o = document.createElement('option'); o.value=v; o.textContent=v; sel.appendChild(o); }); };
+      fillSel(fEls.type, types);
+      fillSel(fEls.material, mats);
+      fillSel(fEls.collection, cols);
+    };
+    const renderCollections = () => {
+      const all = Object.entries(PRODUCTS);
+      const min = parseInt(fEls.min.value || '0', 10);
+      const maxRaw = fEls.max.value && fEls.max.value.trim()!=='' ? parseInt(fEls.max.value,10) : Infinity;
+      const ft = fEls.type.value;
+      const fm = fEls.material.value;
+      const fc = fEls.collection.value;
+      const wantNew = fEls.new.checked;
+      const wantHot = fEls.hot.checked;
+      const filtered = all.filter(([id,p])=>{
+        if (ft && p.type!==ft) return false;
+        if (fm && p.material!==fm) return false;
+        if (fc && p.collection!==fc) return false;
+        if (p.price < min) return false;
+        if (p.price > maxRaw) return false;
+        if (wantNew && !p.status?.new) return false;
+        if (wantHot && !p.status?.hot) return false;
+        return true;
+      }).sort((a,b)=>b[1].pop - a[1].pop);
+      fEls.count.textContent = filtered.length ? ('Có ' + filtered.length + ' sản phẩm') : 'Không có sản phẩm phù hợp';
+      fEls.list.innerHTML = '';
+      filtered.forEach(([id,p])=>{
+        const card = document.createElement('div');
+        card.className = 'border rounded bg-white overflow-hidden';
+        const imgSel = p.images?.[0] || '';
+        const storedCol = localStorage.getItem('vongvamay_img_' + id);
+        const imgSrcBase = imgSel ? (document.querySelector(imgSel)?.src || '') : '';
+        const imgSrc = storedCol || imgSrcBase || 'https://placehold.co/800x600?text=H%C3%ACnh';
+        const badge = (p.status?.new ? '<span class="text-xs bg-[#D2B48C]/30 px-2 py-1 rounded mr-2">Mới</span>' : '') + (p.status?.hot ? '<span class="text-xs bg-[#D2B48C]/30 px-2 py-1 rounded">Bán chạy</span>' : '');
+        card.innerHTML = `
+          <div class="relative">
+            <img id="col-img-${id}" src="${imgSrc}" alt="${p.name}" class="w-full h-56 object-cover" onerror="this.src='https://placehold.co/800x600?text=H%C3%ACnh'">
+            <div class="absolute top-2 left-2">${badge}</div>
+            <button class="absolute bottom-2 right-2 text-[10px] underline hidden admin-upload" data-for="col-img-${id}">Thay ảnh</button>
+          </div>
+          <div class="p-4">
+            <div class="serif text-lg">${p.name}</div>
+            <div class="text-sm text-[#8B7355] mt-1">${p.type} • ${p.material} • ${p.collection}</div>
+            <div class="mt-2 font-semibold"><span class="line-through opacity-50 mr-2">${currency.format(p.price)}</span><span>${currency.format(salePrice(p.price))}</span></div>
+            <div class="mt-3 flex gap-3">
+              <button class="border px-3 py-2 hover:bg-black hover:text-white transition add-to-cart" data-id="${id}" data-name="${p.name}" data-price="${p.price}">Thêm vào giỏ</button>
+              <button class="border px-3 py-2 hover:bg-black hover:text-white transition view-detail" data-id="${id}">Xem</button>
+            </div>
+          </div>
+        `;
+        fEls.list.appendChild(card);
+      });
+    };
+    const initCollectionsPage = () => {
+      if (!fEls.list) return;
+      initCollectionFilters();
+      renderCollections();
+      ['change','input'].forEach(ev=>{
+        [fEls.type,fEls.material,fEls.collection,fEls.min,fEls.max,fEls.new,fEls.hot].forEach(el=>el?.addEventListener(ev, renderCollections));
+      });
+      fEls.apply?.addEventListener('click', renderCollections);
+      fEls.clear?.addEventListener('click', () => {
+        [fEls.type,fEls.material,fEls.collection].forEach(el=>{ if (el) el.value=''; });
+        [fEls.min,fEls.max].forEach(el=>{ if (el) el.value=''; });
+        [fEls.new,fEls.hot].forEach(el=>{ if (el) el.checked=false; });
+        renderCollections();
+      });
+      fEls.list.addEventListener('click', (e) => {
+        const btn = e.target.closest('.view-detail');
+        if (btn) {
+          const id = btn.getAttribute('data-id');
+          openProduct(id);
+        }
+      });
+    };
+    initCollectionsPage();
+    const applySaleLabels = () => {
+      try {
+        document.querySelectorAll('.product-card').forEach(card => {
+          const btn = card.querySelector('.add-to-cart');
+          const priceEl = card.querySelector('.mt-4 p.text-sm');
+          if (btn && priceEl) {
+            const orig = parseInt(btn.getAttribute('data-price') || '0', 10);
+            if (!isNaN(orig) && orig > 0) {
+              const sale = salePrice(orig);
+              btn.setAttribute('data-price', String(orig));
+              priceEl.innerHTML = '<span class="line-through opacity-50 mr-2">' + currency.format(orig) + '</span><span>' + currency.format(sale) + '</span>';
+            }
+          }
+        });
+      } catch {}
+      document.querySelectorAll('#products article').forEach(a => {
+        const btn = a.querySelector('.add-to-cart');
+        const priceEl = a.querySelector('.font-semibold');
+        if (btn && priceEl) {
+          const orig = parseInt(btn.getAttribute('data-price'), 10);
+          const sale = salePrice(orig);
+          btn.setAttribute('data-price', String(orig));
+          priceEl.innerHTML = '<span class="line-through opacity-50 mr-2">' + currency.format(orig) + '</span><span>' + currency.format(sale) + '</span>';
+        }
+      });
+    };
+    applySaleLabels();
+    const IMAGE_KEY_PREFIX = 'vongvamay_img_';
+    const getImageKey = (id) => IMAGE_KEY_PREFIX + id;
+    const loadImage = (id) => localStorage.getItem(getImageKey(id));
+    const saveImage = (id, dataUrl) => localStorage.setItem(getImageKey(id), dataUrl);
+    const applyStoredImages = () => {
+      ['ring-daisy', 'ring-amber', 'ring-pearl', 'ring-combo', 'ring-custom', 'ring-classic'].forEach(id => {
+        const imgEl = document.getElementById('img-' + id);
+        const stored = loadImage(id);
+        if (imgEl && stored) imgEl.src = stored;
+      });
+    };
+    applyStoredImages();
+    const galleryKey = (idx) => GALLERY_KEY_PREFIX + idx;
+    const applyGalleryImages = () => {
+      for (let i = 1; i <= 5; i++) {
+        const el = document.getElementById('img-gallery-' + i);
+        const data = localStorage.getItem(galleryKey(i));
+        if (el && data) el.src = data;
+      }
+    };
+    applyGalleryImages();
+    for (let i = 1; i <= 5; i++) {
+      const el = document.getElementById('img-gallery-' + i);
+      if (el) {
+        el.classList.add('cursor-zoom-in');
+        el.addEventListener('click', () => {
+          const data = localStorage.getItem(galleryKey(i));
+          const src = data || el.src;
+          const zi = document.getElementById('zoomImg');
+          const overlay = document.getElementById('imageZoom');
+          if (zi && overlay) {
+            zi.src = src;
+            overlay.classList.remove('hidden');
+          }
+        });
+      }
+    }
+    document.querySelectorAll('.admin-upload').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const raw = btn.getAttribute('data-for') || '';
+        const forId = raw.replace(/^img-/, '').replace(/^col-img-/, '');
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.addEventListener('change', async () => {
+          const file = input.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = () => {
+            const dataUrl = reader.result;
+            if (forId.startsWith('gallery-')) {
+              const idx = parseInt(forId.split('-')[1], 10);
+              localStorage.setItem(galleryKey(idx), dataUrl);
+              const el = document.getElementById('img-gallery-' + idx);
+              if (el) el.src = dataUrl;
+            } else {
+              saveImage(forId, dataUrl);
+              const imgEl = document.getElementById('img-' + forId) || document.getElementById('col-img-' + forId);
+              if (imgEl) imgEl.src = dataUrl;
+            }
+          };
+          reader.readAsDataURL(file);
+        });
+        input.click();
+      });
+    });
+    const galleryUploadAllBtn = document.getElementById('galleryUploadAll');
+    if (galleryUploadAllBtn) {
+      galleryUploadAllBtn.addEventListener('click', () => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.multiple = true;
+        input.addEventListener('change', () => {
+          const files = Array.from(input.files || []);
+          files.slice(0,5).forEach((file, idx) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              localStorage.setItem(galleryKey(idx+1), reader.result);
+              const el = document.getElementById('img-gallery-' + (idx+1));
+              if (el) el.src = reader.result;
+            };
+            reader.readAsDataURL(file);
+          });
+        });
+        input.click();
+      });
+    }
+    const heroSection = document.getElementById('heroSection');
+    const HERO_IMAGES_DEFAULT = [
+      'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&q=80&w=1600',
+      'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=1600',
+      'https://images.unsplash.com/photo-1610136630460-647716cc903c?auto=format&fit=crop&q=80&w=1600'
+    ];
+    const HERO_LIST_KEY = 'vongvamay_hero_list';
+    let heroSlides = [];
+    let heroSlideIdx = 0;
+    let heroInterval = null;
+    const heroInner = document.getElementById('heroInner');
+    const renderHeroSlides = () => {
+      if (!heroInner) return;
+      heroInner.innerHTML = heroSlides.map(u => `<div class="w-full h-full shrink-0 bg-center bg-cover" style="background-image: linear-gradient(rgba(245,245,220,0.6), rgba(245,245,220,0.6)), url('${u}')"></div>`).join('');
+      heroInner.style.transform = 'translateX(0%)';
+    };
+    const buildHeroSlides = () => {
+      let slides = [];
+      let uploadedList = [];
+      try { uploadedList = JSON.parse(localStorage.getItem(HERO_LIST_KEY) || '[]'); } catch { uploadedList = []; }
+      if (uploadedList && uploadedList.length) {
+        slides = uploadedList.slice();
+        if (slides.length < HERO_IMAGES_DEFAULT.length) HERO_IMAGES_DEFAULT.forEach(u => slides.push(u));
+      } else {
+        const uploaded = localStorage.getItem(HERO_KEY);
+        if (uploaded) slides.push(uploaded);
+        HERO_IMAGES_DEFAULT.forEach(u => slides.push(u));
+      }
+      heroSlides = slides;
+    };
+    const applyHero = () => {
+      if (!heroInner) return;
+      buildHeroSlides();
+      if (!heroSlides.length) heroSlides = HERO_IMAGES_DEFAULT.slice();
+      heroSlideIdx = 0;
+      renderHeroSlides();
+      if (heroInterval) clearInterval(heroInterval);
+      heroInterval = setInterval(() => {
+        heroSlideIdx = (heroSlideIdx + 1) % heroSlides.length;
+        heroInner.style.transform = `translateX(-${heroSlideIdx * 100}%)`;
+      }, 4000);
+    };
+    applyHero();
+    const heroUploadBtn = document.getElementById('heroUpload');
+    if (heroUploadBtn) {
+      heroUploadBtn.addEventListener('click', () => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.addEventListener('change', () => {
+          const file = input.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = () => {
+            localStorage.setItem(HERO_KEY, reader.result);
+            applyHero();
+          };
+          reader.readAsDataURL(file);
+        });
+        input.click();
+      });
+    }
+    const heroUploadMulti = document.getElementById('heroUploadMulti');
+    if (heroUploadMulti) {
+      heroUploadMulti.addEventListener('click', () => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.multiple = true;
+        input.addEventListener('change', async () => {
+          const files = Array.from(input.files || []);
+          if (!files.length) return;
+          const urls = await Promise.all(files.map(f => new Promise(res => { const r = new FileReader(); r.onload = () => res(r.result); r.readAsDataURL(f); })));
+          localStorage.setItem(HERO_LIST_KEY, JSON.stringify(urls));
+          applyHero();
+        });
+        input.click();
+      });
+    }
+    const handleHeroFile = (file) => {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        localStorage.setItem(HERO_KEY, reader.result);
+        applyHero();
+      };
+      reader.readAsDataURL(file);
+    };
+    const heroSlider = document.getElementById('heroSlider');
+    if (heroSlider) {
+      heroSlider.addEventListener('dragover', (e) => {
+        e.preventDefault();
+      });
+      heroSlider.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const files = Array.from(e.dataTransfer?.files || []);
+        if (!files.length) return;
+        if (files.length === 1) {
+          handleHeroFile(files[0]);
+        } else {
+          Promise.all(files.map(f => new Promise(res => { const r = new FileReader(); r.onload = () => res(r.result); r.readAsDataURL(f); }))).then(urls => {
+            localStorage.setItem(HERO_LIST_KEY, JSON.stringify(urls));
+            applyHero();
+          });
+        }
+      });
+      heroSlider.addEventListener('paste', (e) => {
+        const items = e.clipboardData?.items || [];
+        const imgs = [];
+        for (let i = 0; i < items.length; i++) {
+          const it = items[i];
+          if (it.type && it.type.startsWith('image/')) {
+            const file = it.getAsFile();
+            if (file) imgs.push(file);
+          }
+        }
+        if (!imgs.length) return;
+        if (imgs.length === 1) {
+          handleHeroFile(imgs[0]);
+        } else {
+          Promise.all(imgs.map(f => new Promise(res => { const r = new FileReader(); r.onload = () => res(r.result); r.readAsDataURL(f); }))).then(urls => {
+            localStorage.setItem(HERO_LIST_KEY, JSON.stringify(urls));
+            applyHero();
+          });
+        }
+      });
+    }
+    const heroGenerateBtn = document.getElementById('heroGenerate');
+    const generateHeroBanner = async () => {
+      const pickGalleryImages = () => {
+        const arr = [];
+        for (let i = 1; i <= 5; i++) {
+          const v = localStorage.getItem(GALLERY_KEY_PREFIX + i);
+          if (v) arr.push(v);
+        }
+        return arr;
+      };
+      const imgs = pickGalleryImages();
+      const W = 1600, H = 900;
+      const canvas = document.createElement('canvas');
+      canvas.width = W; canvas.height = H;
+      const ctx = canvas.getContext('2d');
+      const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+      bgGrad.addColorStop(0, '#f7f2e9');
+      bgGrad.addColorStop(1, '#efe6d6');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, W, H);
+      const drawRoundedRect = (x, y, w, h, r) => {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + w, y, x + w, y + h, r);
+        ctx.arcTo(x + w, y + h, x, y + h, r);
+        ctx.arcTo(x, y + h, x, y, r);
+        ctx.arcTo(x, y, x + w, y, r);
+        ctx.closePath();
+      };
+      const loadImage = (src) => new Promise((resolve) => { const im = new Image(); im.onload = () => resolve(im); im.src = src; });
+      const frames = [
+        { x: 170, y: 240, w: 420, h: 420, r: 24 },
+        { x: 600, y: 200, w: 520, h: 360, r: 24 },
+        { x: 980, y: 360, w: 420, h: 360, r: 24 }
+      ];
+      for (let i = 0; i < frames.length; i++) {
+        const fr = frames[i];
+        drawRoundedRect(fr.x, fr.y, fr.w, fr.h, fr.r);
+        ctx.fillStyle = 'rgba(0,0,0,0.06)';
+        ctx.fill();
+        if (imgs[i]) {
+          try {
+            const im = await loadImage(imgs[i]);
+            ctx.save();
+            drawRoundedRect(fr.x, fr.y, fr.w, fr.h, fr.r);
+            ctx.clip();
+            const scale = Math.max(fr.w / im.width, fr.h / im.height);
+            const dw = im.width * scale, dh = im.height * scale;
+            const dx = fr.x + (fr.w - dw) / 2;
+            const dy = fr.y + (fr.h - dh) / 2;
+            ctx.drawImage(im, dx, dy, dw, dh);
+            ctx.restore();
+          } catch {}
+        }
+      }
+      ctx.fillStyle = 'rgba(93,64,55,0.85)';
+      ctx.font = 'bold 92px serif';
+      ctx.fillText('Vòng & Mây', 160, 160);
+      ctx.fillStyle = 'rgba(75,66,60,0.85)';
+      ctx.font = '28px sans-serif';
+      ctx.fillText('Mỗi vòng tay, nét an yên', 166, 210);
+      ctx.fillStyle = 'rgba(0,0,0,0.08)';
+      ctx.fillRect(0, 0, W, H);
+      const btnW = 280, btnH = 64;
+      const btnX = 160, btnY = 260;
+      drawRoundedRect(btnX, btnY, btnW, btnH, 32);
+      ctx.fillStyle = 'rgba(247, 245, 220, 0.95)';
+      ctx.fill();
+      ctx.fillStyle = '#5D4037';
+      ctx.font = 'bold 26px sans-serif';
+      ctx.fillText('Khám phá ngay', btnX + 40, btnY + 42);
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+      localStorage.setItem(HERO_KEY, dataUrl);
+      applyHero();
+    };
+    heroGenerateBtn?.addEventListener('click', generateHeroBanner);
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => io.observe(el));
+
+    const params2 = new URLSearchParams(location.search);
+    const setpass = params2.get('setpass');
+    if (setpass) {
+      localStorage.setItem(TUNNEL_PASS_KEY, setpass);
+    }
+    const setga = params2.get('setga');
+    if (setga) {
+      localStorage.setItem('vongvamay_ga', setga);
+    }
+    const gaId = localStorage.getItem('vongvamay_ga');
+    if (gaId) {
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      const gtag = function(){ dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', gaId);
+    }
+    const savedAuth = (() => {
+      try { return JSON.parse(localStorage.getItem(PASS_AUTH_KEY) || '{}'); } catch { return {}; }
+    })();
+    const authed = savedAuth.ts && (Date.now() - savedAuth.ts < PASS_TTL_MS);
+    const tunnelPass = localStorage.getItem(TUNNEL_PASS_KEY) || 'vongvamay';
+    const gate = document.getElementById('passGate');
+    const nogate = params2.get('nogate') === '1';
+    if (nogate) {
+      localStorage.setItem(PASS_AUTH_KEY, JSON.stringify({ ts: Date.now() }));
+    }
+    if (!authed && !nogate) {
+      gate?.classList.remove('hidden');
+    }
+    const passInput = document.getElementById('passInput');
+    const passSubmit = document.getElementById('passSubmit');
+    const passError = document.getElementById('passError');
+    const trySubmit = () => {
+      const val = (passInput?.value || '').trim();
+      if (val && val === tunnelPass) {
+        localStorage.setItem(PASS_AUTH_KEY, JSON.stringify({ ts: Date.now() }));
+        gate?.classList.add('hidden');
+      } else {
+        passError?.classList.remove('hidden');
+      }
+    };
+    passSubmit?.addEventListener('click', trySubmit);
+    passInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') trySubmit();
+    });
+    const ADMIN_AUTH_KEY = 'vongvamay_admin_auth';
+    const ADMIN_TTL_MS = 24 * 60 * 60 * 1000;
+    const ADMIN_CRED_KEY = 'vongvamay_admin_cred';
+    const adminBtn = document.getElementById('adminBtn');
+    const adminLogout = document.getElementById('adminLogout');
+    const exportImagesBtn = document.getElementById('exportImagesBtn');
+    const importImagesBtn = document.getElementById('importImagesBtn');
+    const adminLogin = document.getElementById('adminLogin');
+    const adminUserInput = document.getElementById('adminUserInput');
+    const adminPassInput = document.getElementById('adminPassInput');
+    const adminSubmit = document.getElementById('adminSubmit');
+    const adminClose = document.getElementById('adminClose');
+    const adminError = document.getElementById('adminError');
+    const sha256 = async (str) => {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    };
+    (async () => {
+      const reset = params2.get('resetadmin') === '1';
+      if (reset) {
+        localStorage.removeItem(ADMIN_CRED_KEY);
+        localStorage.removeItem(ADMIN_AUTH_KEY);
+      }
+      const su = params2.get('setadmin_user');
+      const sp = params2.get('setadmin_pass');
+      const sa = params2.get('setadmin');
+      if (su && sp) {
+        const user = su.trim();
+        const pass = sp;
+        const hash = await sha256(pass);
+        localStorage.setItem(ADMIN_CRED_KEY, JSON.stringify({ user, hash }));
+      } else if (sa) {
+        const parts = sa.split(':');
+        if (parts.length >= 2) {
+          const user = parts[0].trim();
+          const pass = parts.slice(1).join(':');
+          const hash = await sha256(pass);
+          localStorage.setItem(ADMIN_CRED_KEY, JSON.stringify({ user, hash }));
+        }
+      }
+    })();
+    const adminCred = (() => { try { return JSON.parse(localStorage.getItem(ADMIN_CRED_KEY) || '{}'); } catch { return {}; } })();
+    const savedAdminAuth = (() => { try { return JSON.parse(localStorage.getItem(ADMIN_AUTH_KEY) || '{}'); } catch { return {}; } })();
+    const adminByParam = new URLSearchParams(location.search).get('admin') === '1';
+    let admin = adminByParam || (savedAdminAuth.ts && (Date.now() - savedAdminAuth.ts < ADMIN_TTL_MS));
+    const updateAdminUI = (isAdmin) => {
+      document.querySelectorAll('.admin-upload').forEach(el => el.classList[isAdmin?'remove':'add']('hidden'));
+      const heroUpload = document.getElementById('heroUpload');
+      if (heroUpload) heroUpload.classList[isAdmin?'remove':'add']('hidden');
+      const heroGenerate = document.getElementById('heroGenerate');
+      if (heroGenerate) heroGenerate.classList[isAdmin?'remove':'add']('hidden');
+      const heroUploadMulti = document.getElementById('heroUploadMulti');
+      if (heroUploadMulti) heroUploadMulti.classList[isAdmin?'remove':'add']('hidden');
+      const galleryUploadAll = document.getElementById('galleryUploadAll');
+      if (galleryUploadAll) galleryUploadAll.classList[isAdmin?'remove':'add']('hidden');
+      adminLogout.classList[isAdmin?'remove':'add']('hidden');
+      exportImagesBtn?.classList[isAdmin?'remove':'add']('hidden');
+      importImagesBtn?.classList[isAdmin?'remove':'add']('hidden');
+    };
+    updateAdminUI(admin);
+    adminBtn.addEventListener('click', () => {
+      if (admin) return;
+      adminLogin.classList.remove('hidden');
+      adminError.classList.add('hidden');
+      adminUserInput.value = '';
+      adminPassInput.value = '';
+    });
+    adminClose.addEventListener('click', () => {
+      adminLogin.classList.add('hidden');
+    });
+    adminSubmit.addEventListener('click', async () => {
+      const u = (adminUserInput.value || '').trim();
+      const p = (adminPassInput.value || '').trim();
+      if (!adminCred.user || !adminCred.hash) {
+        adminError.textContent = 'Chưa thiết lập tài khoản Admin. Vui lòng mở URL với ?setadmin=user:pass hoặc ?setadmin_user=...&setadmin_pass=...';
+        adminError.classList.remove('hidden');
+        return;
+      }
+      if (!u || !p) { adminError.textContent = 'Vui lòng nhập đủ tài khoản và mật khẩu.'; adminError.classList.remove('hidden'); return; }
+      const h = await sha256(p);
+      if (u === adminCred.user && h === adminCred.hash) {
+        localStorage.setItem(ADMIN_AUTH_KEY, JSON.stringify({ ts: Date.now(), user: u }));
+        admin = true;
+        updateAdminUI(true);
+        adminLogin.classList.add('hidden');
+      } else {
+        adminError.textContent = 'Sai tài khoản hoặc mật khẩu.';
+        adminError.classList.remove('hidden');
+      }
+    });
+    adminLogout.addEventListener('click', () => {
+      localStorage.removeItem(ADMIN_AUTH_KEY);
+      admin = false;
+      updateAdminUI(false);
+    });
+    const gatherImagesConfig = () => {
+      const products = {};
+      Object.keys(PRODUCTS).forEach(id => {
+        const val = localStorage.getItem('vongvamay_img_' + id) || '';
+        products[id] = val;
+      });
+      const gallery = {};
+      for (let i=1;i<=5;i++) {
+        gallery[i] = localStorage.getItem(GALLERY_KEY_PREFIX + i) || '';
+      }
+      const hero = localStorage.getItem(HERO_KEY) || '';
+      let heroList = [];
+      try { heroList = JSON.parse(localStorage.getItem(HERO_LIST_KEY) || '[]'); } catch { heroList = []; }
+      return { hero, hero_list: heroList, gallery, products };
+    };
+    const applyImagesConfig = (cfg) => {
+      if (!cfg || typeof cfg !== 'object') return;
+      if (cfg.hero) localStorage.setItem(HERO_KEY, cfg.hero);
+      if (cfg.hero_list && Array.isArray(cfg.hero_list)) localStorage.setItem(HERO_LIST_KEY, JSON.stringify(cfg.hero_list));
+      if (cfg.gallery) {
+        Object.keys(cfg.gallery).forEach(k => {
+          const v = cfg.gallery[k];
+          if (v) localStorage.setItem(GALLERY_KEY_PREFIX + k, v);
+        });
+      }
+      if (cfg.products) {
+        Object.keys(cfg.products).forEach(id => {
+          const v = cfg.products[id];
+          if (v) localStorage.setItem('vongvamay_img_' + id, v);
+        });
+      }
+      applyHero();
+      applyGalleryImages();
+      applyStoredImages();
+      renderCollections?.();
+    };
+    exportImagesBtn?.addEventListener('click', () => {
+      const cfg = gatherImagesConfig();
+      const blob = new Blob([JSON.stringify(cfg)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'vongvamay-images.json';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 1000);
+    });
+    importImagesBtn?.addEventListener('click', () => {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'application/json';
+      input.addEventListener('change', () => {
+        const file = input.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            const cfg = JSON.parse(reader.result);
+            applyImagesConfig(cfg);
+          } catch {}
+        };
+        reader.readAsText(file);
+      });
+      input.click();
+    });
+    (async () => {
+      const configUrl = new URLSearchParams(location.search).get('configUrl');
+      if (configUrl) {
+        try {
+          const res = await fetch(configUrl, { method: 'GET' });
+          if (res.ok) {
+            const cfg = await res.json();
+            applyImagesConfig(cfg);
+          }
+        } catch {}
+      }
+    })();
+  </script>
+</body>
+</html>
